@@ -3,11 +3,11 @@ using Azure;
 using Azure.Storage.Blobs;
 using Azure.Storage;
 
-const string AccountName = "ssastoken";
-const string AccountKey = "AllkL3Rdak9SS5wcnBRWpb/3oU/X6yKQlQCxEn0YKd4Xa4+TClonODjW2cCQbV6Gq8+1dctShffF+AStalF/Sw==";
-const string ContainerName = "images";
-const string BlobName = "705536322_ResumeAcquisitionForm1.png";
-const string ConnectionString = "DefaultEndpointsProtocol=https;AccountName=ssastoken;AccountKey=AllkL3Rdak9SS5wcnBRWpb/3oU/X6yKQlQCxEn0YKd4Xa4+TClonODjW2cCQbV6Gq8+1dctShffF+AStalF/Sw==;EndpointSuffix=core.windows.net";
+const string AccountName = "--Storage Account Name Here--";
+const string AccountKey = "--Storage Account Key Here--";
+const string ContainerName = "--Container Name Here--";
+const string BlobName = "--Blob Resource Name Here--";
+const string ConnectionString = "--Connection String Here--";
 
 BlobContainerClient blobContainerClient = new BlobContainerClient(ConnectionString,
     ContainerName);
@@ -20,10 +20,10 @@ Azure.Storage.Sas.BlobSasBuilder blobSasBuilder = new Azure.Storage.Sas.BlobSasB
     BlobName = "filename.xlsx",
     ExpiresOn = DateTime.UtcNow.AddDays(1),//Let SAS token expire after 1 Day;
 };
-blobSasBuilder.SetPermissions(Azure.Storage.Sas.BlobSasPermissions.Read);//User will only be able to read the blob and it's properties
+blobSasBuilder.SetPermissions(Azure.Storage.Sas.BlobSasPermissions.Read);//User will only be able to read the blob and its properties
 var sasToken = blobSasBuilder.ToSasQueryParameters(new
 StorageSharedKeyCredential(AccountName, AccountKey)).ToString();
-var sasURL = $"{blobClient.Uri.AbsoluteUri}?{sasToken}";
+var sasURL = $"{blobClient.Uri.AbsoluteUri}?{sasToken}"; //Generate URL
 
 Console.WriteLine(sasURL);
 
